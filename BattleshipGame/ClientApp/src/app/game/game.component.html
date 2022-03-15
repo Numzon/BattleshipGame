@@ -1,0 +1,66 @@
+﻿<p *ngIf="!gameHistory"><em>Loading...</em></p>
+
+<h1 *ngIf="gameHistory.playerWhoWon == 0">First player win the match</h1>
+<h1 *ngIf="gameHistory.playerWhoWon == 1">Seconds player win the match</h1>
+<h1 id="tableLabel">First player</h1>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="gameHistory">
+    <thead>
+        <tr>
+            <th></th>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let histories of gameHistory.playerOneHistory;index as i;">
+            <td>
+                {{alphabet[i]}}
+            </td>
+            <td *ngFor="let history of histories;index as j;">
+                <span *ngIf="history.hasBeenHit">HIT</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h1 id="tableLabel">Second player</h1>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="gameHistory">
+    <thead>
+        <tr>
+            <th></th>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let histories of gameHistory.playerTwoHistory;index as i;">
+            <td>
+                {{alphabet[i]}}
+            </td>
+            <td *ngFor="let history of histories;index as j;">
+                <span *ngIf="history.hasBeenHit">HIT</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
