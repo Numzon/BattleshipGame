@@ -42,9 +42,7 @@ namespace BattleshipGame.Core.Classes
                 shipInitial = item.FirstLetterOfName;
                 foreach (var position in item.MaintainedPositions)
                 {
-                    history[position.X][position.Y].HasBeenHit = position.HasBeenHit;
-                    history[position.X][position.Y].HasBeenSunk = hasBeenSunk;
-                    history[position.X][position.Y].ShipInitial = shipInitial;
+                    history[position.X][position.Y] = new HistoryHitPosition(position.X, position.Y, position.HasBeenHit, hasBeenSunk, shipInitial);
                 }
             }
 

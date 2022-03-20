@@ -7,26 +7,23 @@ namespace BattleshipGame.Core.Classes
 {
     public class Game
     {
-        private const int PLAYER_ONE_NUMBER = 0;
-        private const int PLAYER_TWO_NUMBER = 1;
+        private const int FIRST_PLAYER_NUMBER = 0;
+        private const int SECOND_PLAYER_NUMBER = 1;
         public List<Board> PlayersBoards { get; set; } = new List<Board>();
 
         public Game()
         {
-            var firstPlayer = new Board(PLAYER_ONE_NUMBER);
-            var secondPlayer = new Board(PLAYER_TWO_NUMBER);
+            var firstPlayer = new Board(FIRST_PLAYER_NUMBER);
+            var secondPlayer = new Board(SECOND_PLAYER_NUMBER);
             PlayersBoards = new List<Board> { firstPlayer, secondPlayer };
         }
 
         public GameHistory PlayAMatchAndReturnItsHistory()
         {
             var firedPositions = new List<PlayerHitPosition>();
-            
             var random = new Random();
             var playerTurn = random.Next(2);
             var endOfTheMatch = false;
-            var victoriusPlayer = 0;
-
             PlayersBoards.ForEach(x => x.SetNewShipsPositions());
 
             do
@@ -38,14 +35,9 @@ namespace BattleshipGame.Core.Classes
                 firedPositions.Add(result);
                 endOfTheMatch = player.AllShipsHasBeenSunk();
                 playerTurn = (playerTurn + 1) % 2;
-                if (endOfTheMatch)
-                {
-                    victoriusPlayer = playerTurn;
-                }
-                
             } while (endOfTheMatch == false);
 
-            var gameHistory = new GameHistory(PlayersBoards, victoriusPlayer);
+            var gameHistory = new GameHistory(PlayersBoards, playerTurn);
 
             return gameHistory;
         }
