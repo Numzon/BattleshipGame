@@ -2,26 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
-## Development server
+To start the battleship game just run the project. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Colors legend:
+	- Black: Ship has been hit and sunk
+	- Pink: Ship has been hit but hasn't been sunk
+	- White with initial letter: Ship position that hasn't been hit
 
-## Code scaffolding
+Game simulates match between two players. If you want to simulate match again, you have to click "Play again" button.
+Every player have five ships:
+	- Carrier (5 fields on board)
+	- Battleship (4 fields on board)
+	- Destroyer (3 fields on board)
+	- Submarine (3 fields on board)
+	- Patrol boat (2 fields on board)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ships can be placed horizontaly or verticaly. Their position is chosen randomly. Ships can't overlap.
+In game always is on winner and one looser. 
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Ships are stored in list. Every type of ship is a different class but all of them inherite from abstract class Ship.
+If every position that ship take has been hit that means that ship has been sunk.
+Players are allowed to play untill all ships of one of then would be sink.
+Player who is allowed to start first is chosen randomly.
+Every time when match starts position of the ships of both players is generated randomly.
+Firing positions are chosen randomly.
+After the end of the match, state of ships of both players are copied to game history and then send to view. 
