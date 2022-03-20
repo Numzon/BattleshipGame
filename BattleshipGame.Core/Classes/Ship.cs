@@ -8,7 +8,7 @@ namespace BattleshipGame.Core.Classes
     public abstract class Ship
     {
         public string Name { get; private set; }
-        public string FirstLetterOfName => Name.First().ToString();
+        public string FirstLetterOfName => string.IsNullOrEmpty(Name)? string.Empty : Name.First().ToString();
         public int Size { get; private set; }
         public List<HitPosition> MaintainedPositions { get; set; } = new List<HitPosition>();
 

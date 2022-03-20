@@ -5,9 +5,9 @@ using System.Text;
 
 namespace BattleshipGame.Core.Classes
 {
-    public class Position : IEquatable<Position>
-    {        public int X { get; set; }
-        public int Y { get; set; }
+    public abstract class Position : IEquatable<Position>
+    {        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public Position(int x, int y)
         {

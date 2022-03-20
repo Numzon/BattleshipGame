@@ -111,5 +111,15 @@ namespace BattleshipGame.Tests
 
             Assert.AreEqual(0, numberOfMaintainedPostions);
         }
+
+        [TestMethod]
+        public void FirstLetterOfName_GetFirstLetterOfBattleshipName_RetrunsCorrectLetter()
+        {
+            var bShip = new Battleship();
+
+            var firstLetter = bShip.FirstLetterOfName;
+
+            Assert.AreEqual(firstLetter, "B");
+        }
     }
 }

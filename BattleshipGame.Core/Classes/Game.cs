@@ -7,13 +7,14 @@ namespace BattleshipGame.Core.Classes
 {
     public class Game
     {
+        private const int PLAYER_ONE_NUMBER = 0;
+        private const int PLAYER_TWO_NUMBER = 1;
         public List<Board> PlayersBoards { get; set; } = new List<Board>();
-
 
         public Game()
         {
-            var firstPlayer = new Board(0);
-            var secondPlayer = new Board(1);
+            var firstPlayer = new Board(PLAYER_ONE_NUMBER);
+            var secondPlayer = new Board(PLAYER_TWO_NUMBER);
             PlayersBoards = new List<Board> { firstPlayer, secondPlayer };
         }
 

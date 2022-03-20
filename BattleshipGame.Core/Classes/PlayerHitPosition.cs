@@ -6,7 +6,7 @@ namespace BattleshipGame.Core.Classes
 {
     public class PlayerHitPosition : HitPosition
     {
-        public int PlayerNumber { get; set; }
+        public int PlayerNumber { get; private set; }
 
         public PlayerHitPosition(int x, int y, int playerNumber) : this(x, y, false, playerNumber)
         {

@@ -43,7 +43,7 @@ namespace BattleshipGame.Tests
 
             var oneOrMoreHasSameReferences = shipsCreated.Any(x => shipsCreatedAfterSecondUse.Any(z => object.ReferenceEquals(x, z)));
 
-            Assert.IsTrue(oneOrMoreHasSameReferences);
+            Assert.IsFalse(oneOrMoreHasSameReferences);
         }
 
         [TestMethod]
@@ -69,23 +69,39 @@ namespace BattleshipGame.Tests
             Assert.IsTrue(result.HasBeenHit);
         }
 
-        //[TestMethod]
-        //public void Fire_ShipGetsHitMultipleTimesAndGetSunk_HasBeenSunkEqualsTrue()
-        //{
-        //    var board = new Board(1);
-        //    board.SetNewShipsPositions();
-        //    var shipPosition = board.Ships.Select(x => x.MaintainedPositions).FirstOrDefault();
-        //    var historyHitPostions = new List<PlayerHitPosition>();
+        [TestMethod]
+        public void Fire_ShipGetsHitMultipleTimesAndGetSunk_HasBeenSunkEqualsTrue()
+        {
+            var board = new Board(1);
+            board.SetNewShipsPositions();
+            var ship = board.Ships.FirstOrDefault();
 
-        //    foreach (var item in shipPosition)
-        //    {
-        //        historyHitPostions.Add(board.Fire(item.X, item.Y));
-        //    }
+            foreach (var item in ship.MaintainedPositions)
+            {
+                board.Fire(item.X, item.Y);
+            }
 
-        //    var lastHistoryHitPosition = historyHitPostions.Last();
+            var hasBeenSunk = ship.HasBeenSunk();
 
-        //    Assert.IsTrue(lastHistoryHitPosition.HasBeenSunk);
-        //}
+            Assert.IsTrue(hasBeenSunk);
+        }
 
+        [TestMethod]
+        public void Fire_ShipGetsHitMultipleTimesAndSunk_FireActionReturnsCorrectHistoryHitPoints()
+        {
+            var board = new Board(1);
+            board.SetNewShipsPositions();
+            var ship = board.Ships.FirstOrDefault();
+            var historyHitPostions = new List<PlayerHitPosition>();
+
+            foreach (var item in ship.MaintainedPositions)
+            {
+                historyHitPostions.Add(board.Fire(item.X, item.Y));
+            }
+
+            var historyMatchesHitPoints = ship.MaintainedPositions.All(x => historyHitPostions.Exists(z => x.X == z.X && x.Y == z.Y));
+
+            Assert.IsTrue(historyMatchesHitPoints);
+        }
     }
 }
