@@ -16,7 +16,7 @@ namespace BattleshipGame.Core.Classes
             PlayerNumber = playerNumber;
         }
 
-        public HistoryHitPosition Fire(int x, int y)
+        public PlayerHitPosition Fire(int x, int y)
         {
             var fightingShips = Ships.Where(x => x.HasBeenSunk() == false).ToList();
             bool hasBeenHit = false;
@@ -36,14 +36,7 @@ namespace BattleshipGame.Core.Classes
                 i++;
             }
 
-            if (hasBeenSunk)
-            {
-                return new HistoryHitPosition(x, y, PlayerNumber, hasBeenHit, hasBeenSunk, ship.Name);
-            }
-            else
-            {
-                return new HistoryHitPosition(x, y, PlayerNumber, hasBeenHit);
-            }
+            return new PlayerHitPosition(x, y, hasBeenHit, PlayerNumber);
         }
 
         public void SetNewShipsPositions()

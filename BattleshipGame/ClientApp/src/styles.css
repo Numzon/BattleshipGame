@@ -14,3 +14,40 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+
+td {
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+.sunk {
+    background-color: black;
+    color: white;
+}
+
+.hit {
+    background-color: mediumvioletred;
+    color: white;
+}
+
+.main {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.center-button {
+    display: flex;
+    justify-content: center;
+}

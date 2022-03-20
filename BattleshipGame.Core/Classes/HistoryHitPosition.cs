@@ -4,26 +4,21 @@ using System.Text;
 
 namespace BattleshipGame.Core.Classes
 {
-    public class HistoryHitPosition : Position
+    public class HistoryHitPosition : HitPosition
     {
-        public int PlayerNumber { get; set; }
-        public bool HasBeenHit { get; set; }
         public bool HasBeenSunk { get; set; }
-        public string NameOfSunkShip { get; set; }
-        public HistoryHitPosition(int x, int y, int playerNumber, bool hasBeenHit,bool hasBeenSunk, string nameOfSunkShip) : this(x,y,playerNumber,hasBeenHit)
+        public string ShipInitial { get; set; }
+
+        public HistoryHitPosition(int x, int y) : base(x,y)
+        {
+
+        }
+
+        public HistoryHitPosition(int x, int y, bool hasBeenHit, bool hasBeenSunk, string shipInitial) : base(x, y,hasBeenHit)
         {
             HasBeenSunk = hasBeenSunk;
-            NameOfSunkShip = nameOfSunkShip;
+            ShipInitial = shipInitial;
         }
 
-        public HistoryHitPosition(int x, int y, int playerNumber, bool hasBeenHit) : this(x,y,playerNumber)
-        {
-            HasBeenHit = hasBeenHit;
-        }
-
-        public HistoryHitPosition(int x, int y, int playerNumber) : base(x, y)
-        {
-            PlayerNumber = playerNumber;
-        }
     }
-}   
+}

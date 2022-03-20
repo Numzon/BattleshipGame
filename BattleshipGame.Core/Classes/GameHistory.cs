@@ -6,29 +6,16 @@ namespace BattleshipGame.Core.Classes
 {
     public class GameHistory 
     {
-        public HistoryHitPosition[][] PlayerOneHistory { get; set; }
-        public HistoryHitPosition[][] PlayerTwoHistory { get; set; }
+        public List<PlayerBoardHistory> PlayersHistory { get; set; } = new List<PlayerBoardHistory>();
         public int PlayerWhoWon { get; set; }
 
-        public GameHistory()
+        public GameHistory(IList<Board> playerBoards, int playerWhoWon)
         {
-            PlayerOneHistory = InitHistoryArray(PlayerOneHistory, 0);
-            PlayerTwoHistory = InitHistoryArray(PlayerTwoHistory, 1);
-        }
-
-        public HistoryHitPosition[][] InitHistoryArray(HistoryHitPosition[][] history, int playerNumber)
-        {
-            history = new HistoryHitPosition[10][];
-            for (int i = 0; i < 10; i++)
+            PlayerWhoWon = playerWhoWon;
+            foreach (var item in playerBoards)
             {
-                history[i] = new HistoryHitPosition[10];
-                for (int j = 0; j < 10; j++)
-                {
-                    history[i][j] = new HistoryHitPosition(i, j, playerNumber);
-                }
+                PlayersHistory.Add(new PlayerBoardHistory(item));
             }
-
-            return history;
         }
     }
 }

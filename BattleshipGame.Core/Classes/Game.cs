@@ -19,43 +19,37 @@ namespace BattleshipGame.Core.Classes
 
         public GameHistory PlayAMatchAndReturnItsHistory()
         {
-            var fireHistory = new List<HistoryHitPosition>();
-            var gameHistory = new GameHistory();
+            var firedPositions = new List<PlayerHitPosition>();
+            
             var random = new Random();
             var playerTurn = random.Next(2);
             var endOfTheMatch = false;
+            var victoriusPlayer = 0;
 
             PlayersBoards.ForEach(x => x.SetNewShipsPositions());
 
             do
             {
                 var player = PlayersBoards.FirstOrDefault(x => x.PlayerNumber == playerTurn);
-                var coordinates = GetRandomCoordinatesThanHasNeverBeenUsedBefore(playerTurn, fireHistory);
+                var coordinates = GetRandomCoordinatesThanHasNeverBeenUsedBefore(playerTurn, firedPositions);
                 var result = player.Fire(coordinates.Item1, coordinates.Item2);
 
-                if (playerTurn == 0)
-                {
-                    gameHistory.PlayerOneHistory[coordinates.Item1][coordinates.Item2] = result;
-                }
-                else
-                {
-                    gameHistory.PlayerTwoHistory[coordinates.Item1][coordinates.Item2] = result;
-                }
-
-                fireHistory.Add(result);
+                firedPositions.Add(result);
                 endOfTheMatch = player.AllShipsHasBeenSunk();
                 playerTurn = (playerTurn + 1) % 2;
                 if (endOfTheMatch)
                 {
-                    gameHistory.PlayerWhoWon = playerTurn;
+                    victoriusPlayer = playerTurn;
                 }
                 
             } while (endOfTheMatch == false);
 
+            var gameHistory = new GameHistory(PlayersBoards, victoriusPlayer);
+
             return gameHistory;
         }
 
-        private (int, int) GetRandomCoordinatesThanHasNeverBeenUsedBefore(int playerNumber, List<HistoryHitPosition> history)
+        private (int, int) GetRandomCoordinatesThanHasNeverBeenUsedBefore(int playerNumber, List<PlayerHitPosition> history)
         {
             var random = new Random();
             int xCoordinate = 0;

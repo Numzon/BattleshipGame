@@ -10,5 +10,10 @@ namespace BattleshipGame.Core.Classes
         public HitPosition(int x, int y) : base(x, y)
         {
         }
+
+        public HitPosition(int x, int y, bool hasBeenHit) : this(x,y)
+        {
+            HasBeenHit = hasBeenHit;
+        }
     }
 }
